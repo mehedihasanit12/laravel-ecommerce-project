@@ -32,12 +32,24 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/sub-category/index', [SubCategoryController::class, 'index'])->name('sub-category.index');
     Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
+    Route::post('/sub-category/store', [SubCategoryController::class, 'store'])->name('sub-category.store');
+    Route::get('/sub-category/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
+    Route::post('/sub-category/update/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
+    Route::get('/sub-category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
 
     Route::get('/brand/index', [BrandController::class, 'index'])->name('brand.index');
     Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+    Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 
     Route::get('/unit/index', [UnitController::class, 'index'])->name('unit.index');
     Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::post('/unit/store', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/edit/{id}', [UnitController::class, 'edit'])->name('unit.edit');
+    Route::post('/unit/update/{id}', [UnitController::class, 'update'])->name('unit.update');
+    Route::get('/unit/delete/{id}', [UnitController::class, 'delete'])->name('unit.delete');
 
     Route::get('/product/index', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
