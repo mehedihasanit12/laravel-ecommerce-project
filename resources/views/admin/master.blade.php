@@ -73,6 +73,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('/')}}admin/assets/js/config.js"></script>
 
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -935,6 +937,43 @@
 
 <!-- Page JS -->
 <script src="{{asset('/')}}admin/assets/js/dashboards-analytics.js"></script>
+
+<!-- include summernote js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote(
+            {
+                height: 350,
+            }
+        );
+    });
+</script>
+
+<script>
+    function getSubCategoryByCategory($categoryId) {
+        $.ajax({
+            type: "GET",
+            url: "{{route('get-sub-category-by-category')}}",
+            data: {'id' : $categoryId},
+            DataType: 'JSON',
+            success: function (response) {
+                console.log(response);
+                var option = '';
+                option += '<option value="">--Select Product Sub Category--</option>';
+                $.each(response, function (key, value) {
+                    option += '<option value=" '+value.id+' "> '+value.name+' </option>';
+                });
+                $('#subCategory').empty();
+                $('#subCategory').append(option);
+            }
+        });
+
+
+
+    }
+</script>
 
 </body>
 </html>

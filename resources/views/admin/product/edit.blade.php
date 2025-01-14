@@ -13,16 +13,15 @@
                     <h5 class="mb-0">Add Procuct Form</h5> <small class="text-muted float-end">Default label</small>
                 </div>
                 <div class="card-body pt-5">
-                    <p class="text-center text-success">{{session('message')}}</p>
-                    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('product.update')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-4">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Category Name</label>
                             <div class="col-sm-10">
-                                <select name="category_id" onchange="getSubCategoryByCategory(this.value)" class="form-control" id="">
+                                <select name="category_id" class="form-control" id="">
                                     <option value="">--Select Product Category--</option>
                                     @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -30,7 +29,7 @@
                         <div class="row mb-4">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Sub Category Name</label>
                             <div class="col-sm-10">
-                                <select name="sub_category_id" class="form-control" id="subCategory">
+                                <select name="sub_category_id" class="form-control" id="">
                                     <option value="">--Select Product Sub Category--</option>
                                     @foreach($sub_categories as $sub_category)
                                         <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>
