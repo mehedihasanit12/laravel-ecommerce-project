@@ -4,14 +4,16 @@
 
     <div class="row">
         <div class="col">
+            <p class="text-center text-success">{{session('message')}}</p>
+            <p class="text-center text-danger">{{session('delete-message')}}</p>
             <div class="card">
                 <div class="card-datatable table-responsive pt-0">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th>SL</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Code</th>
                             <th>Image</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -19,14 +21,22 @@
                         </thead>
 
                         <tbody>
+                        @foreach($products as $product)
                         <tr>
-                            <td>44324</td>
-                            <td>432</td>
-                            <td>34</td>
-                            <td>34</td>
-                            <td>3234</td>
-                            <td>24</td>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->code}}</td>
+                            <td>
+                                <img src="{{asset($product->image)}}" height="50" alt="">
+                            </td>
+                            <td>{{$product->status == 1 ? 'Published' : 'Unpublished'}}</td>
+                            <td>
+                                <a href="{{route('product.detail', ['id' => $product->id])}}" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{route('product.edit', ['id' => $product->id])}}" class="btn btn-success btn-sm"><i class="fa-solid fa-edit"></i></a>
+                                <a href="{{route('product.delete', ['id' => $product->id])}}" class="btn btn-danger btn-sm" onclick=" return confirm('Are you sure to delete this!')" ><i class="fa-solid fa-trash"></i></a>
+                            </td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

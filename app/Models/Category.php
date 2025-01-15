@@ -58,4 +58,14 @@ class Category extends Model
         }
         self::$category->delete();
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
 }

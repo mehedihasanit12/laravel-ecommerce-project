@@ -78,10 +78,35 @@ class Product extends Model
     {
         self::$product = Product::find($id);
 
-        if (self::$product->image)
+        if (file_exists(self::$product->image))
         {
             unlink(self::$product->image);
         }
         self::$product->delete();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function otherImage()
+    {
+        return $this->hasMany(OtherImage::class);
     }
 }

@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('admin.product.index');
+        return view('admin.product.index', ['products' => Product::all()]);
     }
 
     public function create()
@@ -44,6 +44,11 @@ class ProductController extends Controller
         return back()->with('message', 'Product info save successfully');
     }
 
+    public function detail($id)
+    {
+        return view('admin.product.detail', ['product' => Product::find($id)]);
+    }
+
     public function edit($id)
     {
         return view('admin.product.edit', [
@@ -51,19 +56,25 @@ class ProductController extends Controller
             'categories'        => Category::all(),
             'sub_categories'    => SubCategory::all(),
             'brands'            => Brand::all(),
-            'units'             => Unit::all()
+            'units'             => Unit::all(),
+            'other_images'      => OtherImage::all()
         ]);
     }
 
     public function update(Request $request, $id)
     {
         Product::updateProduct($request, $id);
+        if ($request->file('other_image'))
+        {
+            OtherImage::updateOtherImage($id, $request->file('other_image'));
+        }
         return redirect('/product/index')->with('message', 'Product info update successfully');
     }
 
     public function delete($id)
     {
         Product::deleteProduct($id);
+        OtherImage::deleteOtherImage($id);
         return back()->with('delete-message', 'Product info deleted successfully');
     }
 }
