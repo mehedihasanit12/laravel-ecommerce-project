@@ -13,8 +13,8 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
-Route::get('/product-category', [WebsiteController::class, 'category'])->name('product-category');
-Route::get('/product-detail', [WebsiteController::class, 'product'])->name('product-detail');
+Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('product-category');
+Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::get('/customer/login-register', [CustomerAuthController::class, 'index'])->name('login-register');
