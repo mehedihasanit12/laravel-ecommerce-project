@@ -22,9 +22,11 @@
     <!--shopping cart area start -->
     <div class="shopping_cart_area mt-60">
         <div class="container">
-            <form action="#">
+            <form action="{{route('cart.update')}}" method="POST">
                 <div class="row">
                     <div class="col-12">
+                        <p class="text-center text-success">{{session('message')}}</p>
+                        <p class="text-center text-danger">{{session('cart-delete-message')}}</p>
                         <div class="table_desc">
                             <div class="cart_page table-responsive">
                                 <table>
@@ -39,37 +41,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php($sum=0)
+                                    @foreach($cart_products as $key => $cart_product)
                                     <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="{{asset('/')}}website/assets/img/s-product/product.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                        <td class="product-price">£65.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£130.00</td>
-
-
+                                        <td class="product_remove"><a href="{{route('cart.remove', ['id' => $cart_product->rowId])}}" onclick="return confirm('Are you sure ..');"><i class="fa fa-trash-o"></i></a></td>
+                                        <td class="product_thumb"><a href="#"><img src="{{asset($cart_product->options->image)}}" width="50" height="50" alt=""></a></td>
+                                        <td class="product_name"><a href="{{route('product-detail', ['id' => $cart_product->id])}}">{{$cart_product->name}}</a></td>
+                                        <td class="product-price">BDT {{$cart_product->price}}</td>
+                                        <td class="product_quantity">
+                                                @csrf
+                                                <label>Quantity</label>
+                                                <input value="{{$cart_product->rowId}}" name="qty[{{$key}}][rowId]" type="hidden">
+                                                <input min="1" max="100" value="{{$cart_product->qty}}" name="qty[{{$key}}][qty]" type="number">
+                                        </td>
+                                        <td class="product_total">BDT {{$cart_product->price * $cart_product->qty}}</td>
                                     </tr>
-
-                                    <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="{{asset('/')}}website/assets/img/s-product/product2.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbags justo</a></td>
-                                        <td class="product-price">£90.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£180.00</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="#"><img src="{{asset('/')}}website/assets/img/s-product/product9.jpg" alt=""></a></td>
-                                        <td class="product_name"><a href="#">Handbag elit</a></td>
-                                        <td class="product-price">£80.00</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                        <td class="product_total">£160.00</td>
-
-
-                                    </tr>
+                                     @php($sum = $sum + ($cart_product->price * $cart_product->qty))
+                                    @endforeach
 
                                     </tbody>
                                 </table>
@@ -99,17 +87,25 @@
                                 <div class="coupon_inner">
                                     <div class="cart_subtotal">
                                         <p>Subtotal</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p class="cart_amount">BDT {{ number_format($sum) }}</p>
+                                    </div>
+                                    <div class="cart_subtotal">
+                                        <p>Tax Amount (15%)</p>
+                                        <p class="cart_amount">
+                                            @php($tax = round( ($sum * 0.15) ))
+                                            BDT {{number_format($tax)}}</p>
                                     </div>
                                     <div class="cart_subtotal ">
                                         <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                        <p class="cart_amount"><span>Flat Rate:</span>BDT {{$shipping = 100}}</p>
                                     </div>
                                     <a href="#">Calculate shipping</a>
 
                                     <div class="cart_subtotal">
-                                        <p>Total</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p>Total Payable</p>
+                                        <p class="cart_amount">
+                                            @php($totalBill = $sum + $tax + $shipping)
+                                            BDT {{number_format($totalBill)}}</p>
                                     </div>
                                     <div class="checkout_btn">
                                         <a href="{{route('checkout.index')}}">Proceed to Checkout</a>

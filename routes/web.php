@@ -16,6 +16,9 @@ Route::get('/', [WebsiteController::class, 'index'])->name('home');
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('product-category');
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
 Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/remove/{id}', [CartController::class, 'deleteProduct'])->name('cart.remove');
+Route::post('/cart/update', [CartController::class, 'updateProduct'])->name('cart.update');
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::get('/customer/login-register', [CustomerAuthController::class, 'index'])->name('login-register');
 
