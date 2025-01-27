@@ -20,7 +20,11 @@ Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.
 Route::get('/cart/remove/{id}', [CartController::class, 'deleteProduct'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'updateProduct'])->name('cart.update');
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/new-customer', [CheckoutController::class, 'newCustomer'])->name('checkout.new-customer');
+Route::post('/checkout/customer-login', [CheckoutController::class, 'customerLogin'])->name('checkout.customer-login');
+Route::get('/checkout/billing-info', [CheckoutController::class, 'billingInfo'])->name('checkout.billing-info');
 Route::get('/customer/login-register', [CustomerAuthController::class, 'index'])->name('login-register');
+Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
