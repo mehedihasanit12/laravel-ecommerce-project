@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Session;
 
 class CheckoutController extends Controller
 {
+    private $customer, $orderId;
+
     public function index()
     {
         if (Session::get('id'))
@@ -19,7 +23,9 @@ class CheckoutController extends Controller
 
     public function newCustomer(Request $request)
     {
-        Customer::newCustomer($request);
+       $this->customer = Customer::newCustomer($request);
+        Session::put('id', $this->customer->id);
+        Session::put('name', $this->customer->name);
         return redirect('/checkout/billing-info');
     }
 
@@ -28,7 +34,7 @@ class CheckoutController extends Controller
         return view('website.checkout.billing-info');
     }
 
-    private $customer;
+
     public function customerLogin(Request $request)
     {
         $this->customer = Customer::where('email', $request->email)->first();
@@ -50,5 +56,17 @@ class CheckoutController extends Controller
         {
             return back()->with('message', 'Email address is invalid.');
         }
+    }
+
+    public function newOrder(Request $request)
+    {
+        $this->orderId = Order::newOrder($request);
+        OrderDetail::newOrderDetail($this->orderId);
+        return redirect('/checkout/complete-order')->with('message', 'Your order info post successfully. Please wait, we will contact with you soon.');
+    }
+
+    public function completeOrder()
+    {
+        return view('website.checkout.complete-order');
     }
 }

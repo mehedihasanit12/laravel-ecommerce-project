@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\CartController;
@@ -15,14 +16,20 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('product-category');
 Route::get('/product-detail/{id}', [WebsiteController::class, 'product'])->name('product-detail');
+
 Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/direct-add/{id}', [CartController::class, 'directAddToCart'])->name('cart.direct-add');
 Route::get('/cart/remove/{id}', [CartController::class, 'deleteProduct'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'updateProduct'])->name('cart.update');
+
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/new-customer', [CheckoutController::class, 'newCustomer'])->name('checkout.new-customer');
 Route::post('/checkout/customer-login', [CheckoutController::class, 'customerLogin'])->name('checkout.customer-login');
 Route::get('/checkout/billing-info', [CheckoutController::class, 'billingInfo'])->name('checkout.billing-info');
+Route::post('/checkout/new-order', [CheckoutController::class, 'newOrder'])->name('checkout.new-order');
+Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrder'])->name('checkout.complete-order');
+
 Route::get('/customer/login-register', [CustomerAuthController::class, 'index'])->name('login-register');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
@@ -66,4 +73,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+    Route::get('/admin/all-order', [AdminOrderController::class, 'index'])->name('admin.all-order');
 });

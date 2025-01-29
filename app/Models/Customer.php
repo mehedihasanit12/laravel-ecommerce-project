@@ -18,5 +18,7 @@ class Customer extends Model
         self::$customer->password = bcrypt($request->password);
 
         self::$customer->save();
+
+        return self::$customer;
     }
 }

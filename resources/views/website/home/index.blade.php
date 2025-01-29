@@ -207,7 +207,7 @@
                                                             <div class="action_links">
                                                                 <ul>
                                                                     <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                                    <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                                                    <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                                                     <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                                                 </ul>
                                                             </div>
@@ -493,7 +493,7 @@
                                     <div class="action_links">
                                         <ul>
                                             <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                            <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                            <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $first_new_product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                             <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                         </ul>
                                     </div>
@@ -530,7 +530,7 @@
                                 <div class="action_links">
                                     <ul>
                                         <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                        <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                        <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $second_new_product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                         <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                     </ul>
                                 </div>
@@ -570,7 +570,7 @@
                                         <div class="action_links">
                                             <ul>
                                                 <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                                <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $third_new_product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                                 <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                             </ul>
                                         </div>
@@ -658,7 +658,7 @@
                                         <div class="action_links">
                                             <ul>
                                                 <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                                <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $home_category_one_product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                                 <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                             </ul>
                                         </div>
@@ -721,7 +721,7 @@
                                             <div class="action_links">
                                                 <ul>
                                                     <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                    <li class="add_to_cart"><a href="cart.html" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                                    <li class="add_to_cart"><a href="{{route('cart.direct-add', ['id' => $home_category_two_product->id])}}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
                                                     <li class="compare"><a href="#" title="compare"><i class="zmdi zmdi-swap"></i></a></li>
                                                 </ul>
                                             </div>
