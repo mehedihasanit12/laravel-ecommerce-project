@@ -30,13 +30,13 @@
                                 <td>{{$order->order_total}}</td>
                                 <td>{{$order->order_status}}</td>
                                 <td>
-                                    <a href="{{route('category.edit', ['id' => $order->id])}}" class="btn btn-success btn-sm">
+                                    <a href="{{route('admin.order-detail', ['id' => $order->id])}}" class="btn btn-success btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{route('category.edit', ['id' => $order->id])}}" class="btn btn-secondary btn-sm">
+                                    <a href="{{route('admin.order-edit', ['id' => $order->id])}}" class="btn btn-secondary btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{route('category.edit', ['id' => $order->id])}}" class="btn btn-primary btn-sm">
+                                    <a href="{{route('admin.order-invoice', ['id' => $order->id])}}" class="btn btn-primary btn-sm">
                                         <i class="fa-solid fa-file-lines me-2"></i> Invoice
                                     </a>
                                     <a href="{{route('category.edit', ['id' => $order->id])}}" class="btn btn-info btn-sm">
