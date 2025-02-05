@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
+use PDF;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
@@ -70,5 +72,24 @@ class AdminOrderController extends Controller
     public function invoice($id)
     {
         return view('admin.order.invoice', ['order' => Order::find($id)]);
+    }
+
+    private $pdf;
+    public function invoicePrint($id)
+    {
+        $this->pdf = PDF::loadView("admin.order.invoice-print", ['order' => Order::find($id)]);
+        return $this->pdf->stream('invoice00'.$id.'.pdf');
+    }
+
+    public function delete($id)
+    {
+        $this->order = Order::find($id);
+        if ($this->order->order_status != 'Cancel')
+        {
+            return back()->with('message', 'Sorry .. you can not delete this.');
+        }
+        Order::deleteOrder($id);
+        OrderDetail::deleteOrderDetail($id);
+        return back()->with('delete-message', 'Order info delete successfully.');
     }
 }

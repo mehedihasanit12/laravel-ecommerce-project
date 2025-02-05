@@ -34,4 +34,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public static function deleteOrder($id)
+    {
+        Order::find($id)->delete();
+    }
 }

@@ -105,9 +105,9 @@
                                     <tr>
                                         <td class="title">
                                             <img
-                                                src="https://sparksuite.github.io/simple-html-invoice-template/images/logo.png"
-                                                style="width: 100%; max-width: 300px"
-                                            />
+                                                src="https://admission.univadmin.info/assets/img/shniyd_logo.jpg"
+                                                style="width: 100%; max-width: 50px"
+                                            /> NIYD
                                         </td>
 
                                         <td>
@@ -157,32 +157,41 @@
                         </tr>
 
                         <tr class="heading">
-                            <td>Item</td>
-                            <td>Quantity</td>
-                            <td>Unit Price</td>
-                            <td>Total Price</td>
+                            <td >Item Info</td>
+                            <td >Unit Price (BDT)</td>
+                            <td align="center">Quantity</td>
+                            <td align="right">Total Price (BDT)</td>
                         </tr>
-
-                        @foreach($order->orderDetail as $item)
-                            <tr class="item">
-                                <td>{{$item->name}}</td>
-
-                                <td>BDT {{$item->price}}</td>
-                            </tr>
-                        @endforeach
+                        @php($total = 0)
+                        @foreach($order->orderDetail as $orderDetail)
                         <tr class="item">
-                            <td>Hosting (3 months)</td>
-                            <td>Hosting (3 months)</td>
-                            <td>Hosting (3 months)</td>
-                            <td>$75.00</td>
+                            <td >{{$orderDetail->product_name}}</td>
+                            <td >{{$orderDetail->product_price}}</td>
+                            <td align="center">{{$orderDetail->product_qty}}</td>
+                            <td align="right">BDT {{$orderDetail->product_qty * $orderDetail->product_price}}</td>
                         </tr>
-
-
+                            @php($total = $total + ($orderDetail->product_qty * $orderDetail->product_price))
+                        @endforeach
 
                         <tr class="total">
                             <td colspan="3"></td>
 
-                            <td>Total: {{$order->order_total}}</td>
+                            <td>Item Total: BDT {{$total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="3"></td>
+
+                            <td>Tax Amount: BDT {{$order->tax_total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="3"></td>
+
+                            <td>Shipping Cost: BDT {{$order->shipping_total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="3"></td>
+
+                            <td>Total Payable: BDT {{$order->order_total}}</td>
                         </tr>
                     </table>
                 </div>

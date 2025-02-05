@@ -39,10 +39,10 @@
                                     <a href="{{route('admin.order-invoice', ['id' => $order->id])}}" class="btn btn-primary btn-sm">
                                         <i class="fa-solid fa-file-lines me-2"></i> Invoice
                                     </a>
-                                    <a href="{{route('category.edit', ['id' => $order->id])}}" class="btn btn-info btn-sm">
+                                    <a href="{{route('admin.order-invoice-print', ['id' => $order->id])}}" target="_blank" class="btn btn-info btn-sm">
                                         <i class="fa fa-print me-2"></i> Print
                                     </a>
-                                    <a href="{{route('category.delete', ['id' => $order->id])}}" class="btn btn-danger btn-sm" onclick=" return confirm('Are you sure to delete this!')">
+                                    <a href="{{route('admin.order-delete', ['id' => $order->id])}}" class="btn btn-danger btn-sm {{$order->order_status == 'Cancel' ? ' ' : 'disabled'}}" onclick=" return confirm('Are you sure to delete this!')">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
