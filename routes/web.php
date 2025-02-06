@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Route;
@@ -98,4 +99,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/admin/order-invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin.order-invoice');
     Route::get('/admin/order-invoice-print/{id}', [AdminOrderController::class, 'invoicePrint'])->name('admin.order-invoice-print');
     Route::get('/admin/order-delete/{id}', [AdminOrderController::class, 'delete'])->name('admin.order-delete');
+
+    Route::get('/admin/all-customer', [AdminCustomerController::class, 'index'])->name('admin.all-customer');
+    Route::get('/admin/add-customer', [AdminCustomerController::class, 'create'])->name('admin.add-customer');
 });

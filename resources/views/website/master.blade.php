@@ -115,7 +115,7 @@
                             </form>
                         </div>
                         <div class="mini_cart_wrapper">
-                            <a href="javascript:void(0)"><i class="zmdi zmdi-shopping-basket"></i> <span> {{count( Cart::content() )}} items - BDT {{Cart::total()}}</span> </a>
+                            <a href="javascript:void(0)"><i class="zmdi zmdi-shopping-basket"></i> <span> {{count( Cart::content() )}} items - BDT {{Session::get('order_total')}}</span> </a>
                             <!--mini cart-->
                             <div class="mini_cart">
                                 @foreach(Cart::content() as $item)
@@ -145,7 +145,7 @@
                                 <div class="mini_cart_footer">
                                     <div class="cart_button">
                                         <a href="{{route('cart.index')}}">View cart</a>
-                                        <a href="checkout.html">Checkout</a>
+                                        <a href="{{route('checkout.index')}}">Checkout</a>
                                     </div>
                                 </div>
 
