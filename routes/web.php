@@ -14,6 +14,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CourierController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('home');
 Route::get('/product-category/{id}', [WebsiteController::class, 'category'])->name('product-category');
@@ -102,4 +103,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/admin/all-customer', [AdminCustomerController::class, 'index'])->name('admin.all-customer');
     Route::get('/admin/add-customer', [AdminCustomerController::class, 'create'])->name('admin.add-customer');
+
+    Route::resource('courier', CourierController::class);
 });

@@ -26,8 +26,14 @@ class WebsiteController extends Controller
         return view('website.category.index',['products' => Product::where('category_id', $id)->latest()->get()]);
     }
 
+    public $product, $categoryProducts;
     public function product($id)
     {
-        return view('website.product.index', ['product' => Product::find($id)]);
+        $this->product = Product::find($id);
+        $this->categoryProducts = Product::where('category_id', $this->product->category_id)->latest()->get();
+        return view('website.product.index', [
+            'product' => $this->product,
+            'category_products' => $this->categoryProducts
+        ]);
     }
 }
