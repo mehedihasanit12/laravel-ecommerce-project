@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courier;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use PDF;
@@ -26,7 +27,8 @@ class AdminOrderController extends Controller
     public function edit($id)
     {
         return view('admin.order.edit', [
-            'order' => Order::find($id)
+            'order'     => Order::find($id),
+            'couriers'  => Courier::all()
         ]);
     }
 

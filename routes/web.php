@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\CartController;
@@ -105,4 +106,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/admin/add-customer', [AdminCustomerController::class, 'create'])->name('admin.add-customer');
 
     Route::resource('courier', CourierController::class);
+
+    Route::resource('user', UserController::class);
 });

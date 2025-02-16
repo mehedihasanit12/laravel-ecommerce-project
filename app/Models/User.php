@@ -64,4 +64,66 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static $user, $image, $imageName, $imageUrl, $directory;
+
+    public static function getImageUrl($request)
+    {
+        self::$image = $request->file('image');
+        self::$imageName = self::$image->getClientOriginalName();
+        self::$directory = 'upload/user-images/';
+        self::$image->move(self::$directory, self::$imageName);
+        self::$imageUrl = self::$directory.self::$imageName;
+        return self::$imageUrl;
+    }
+
+    public static function newUser($request)
+    {
+        self::$user = new User();
+        self::$user->name = $request->name;
+        self::$user->email = $request->email;
+        self::$user->password = bcrypt($request->password);
+        if ($request->file('image'))
+        {
+            self::$user->profile_photo_path = self::getImageUrl($request);
+        }
+        self::$user->mobile = $request->mobile;
+        self::$user->save();
+    }
+
+    public static function updateUser($request, $id)
+    {
+        self::$user = User::find($id);
+
+        if ($request->file('image'))
+        {
+            self::$imageUrl = self::getImageUrl($request);
+        }
+        else
+        {
+            self::$imageUrl = self::$user->profile_photo_path;
+        }
+
+        self::$user->name = $request->name;
+        self::$user->email = $request->email;
+        if ($request->password)
+        {
+            self::$user->password = bcrypt($request->password);
+        }
+        self::$user->profile_photo_path = self::$imageUrl;
+        self::$user->mobile = $request->mobile;
+        self::$user->save();
+    }
+
+    public static function deleteUser($id)
+    {
+        self::$user = User::find($id);
+
+        if (self::$user->profile_photo_path)
+        {
+            unlink(self::$user->profile_photo_path);
+        }
+        self::$user->delete();
+    }
+
 }

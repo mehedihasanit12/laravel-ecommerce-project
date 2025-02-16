@@ -20,7 +20,7 @@
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Category Name</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name" id="basic-default-name" placeholder="Category Name" />
-                                @error('title')
+                                @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

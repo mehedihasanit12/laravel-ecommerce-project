@@ -44,9 +44,9 @@
                         <div class="col-md-9">
                             <select class="form-control" name="courier_id">
                                 <option value=""> -- Select Courier Info -- </option>
-                                <option value="1" {{$order->courier_id == 1 ? 'selected' : ''}}> SA Probibahan </option>
-                                <option value="2" {{$order->courier_id == 2 ? 'selected' : ''}}> Korotoa </option>
-                                <option value="3" {{$order->courier_id == 3 ? 'selected' : ''}}> Subdorban </option>
+                                @foreach($couriers as $courier)
+                                <option value="{{$courier->id}}" {{$courier->id == $order->courier_id ? 'selected' : ''}}> {{$courier->name}} </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
