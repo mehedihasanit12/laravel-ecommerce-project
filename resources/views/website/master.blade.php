@@ -53,7 +53,7 @@
                                 @if(Session::get('id'))
                                     <a href="#"><i class="zmdi zmdi-account"></i> {{Session::get('name')}} <i class="zmdi zmdi-caret-down"></i></a>
                                     <ul class="dropdown_links">
-                                        <li><a href="{{route('login-register')}}">My Dashboard </a></li>
+                                        <li><a href="{{route('customer.dashboard')}}">My Dashboard </a></li>
                                         <li><a href="{{route('customer.logout')}}">Logout</a></li>
                                     </ul>
                                 @else

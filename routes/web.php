@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,20 @@ Route::get('/checkout/complete-order', [CheckoutController::class, 'completeOrde
 
 Route::get('/customer/login-register', [CustomerAuthController::class, 'index'])->name('login-register');
 Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+Route::post('/customer/login', [CustomerAuthController::class, 'loginCheck'])->name('customer.login');
+Route::post('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
+
+
+Route::middleware(['customer'])->group(function () {
+    Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
+    Route::get('/customer/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile');
+    Route::get('/customer/order', [CustomerDashboardController::class, 'order'])->name('customer.order');
+    Route::get('/customer/wishlist', [CustomerDashboardController::class, 'wishlist'])->name('customer.wishlist');
+    Route::get('/customer/change-password', [CustomerDashboardController::class, 'changePassword'])->name('customer.change-password');
+});
+
+
+
 
 
 // SSLCOMMERZ Start
