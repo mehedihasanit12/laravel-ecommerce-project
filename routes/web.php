@@ -29,6 +29,7 @@ Route::get('/cart/remove/{id}', [CartController::class, 'deleteProduct'])->name(
 Route::post('/cart/update', [CartController::class, 'updateProduct'])->name('cart.update');
 
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/check-customer-email', [CheckoutController::class, 'checkCustomerEmail'])->name('check-customer-email');
 Route::post('/checkout/new-customer', [CheckoutController::class, 'newCustomer'])->name('checkout.new-customer');
 Route::post('/checkout/customer-login', [CheckoutController::class, 'customerLogin'])->name('checkout.customer-login');
 Route::get('/checkout/billing-info', [CheckoutController::class, 'billingInfo'])->name('checkout.billing-info');

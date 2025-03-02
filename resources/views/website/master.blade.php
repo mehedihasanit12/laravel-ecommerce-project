@@ -856,10 +856,27 @@
 <!-- Plugins JS -->
 <script src="{{asset('/')}}website/assets/js/plugins.js"></script>
 
+<script src="{{asset('/')}}website/assets/js/jquery-3.7.1.min.js"></script>
+
 <!-- Main JS -->
 <script src="{{asset('/')}}website/assets/js/main.js"></script>
 
+<script>
+    $('#email').blur(function () {
+        var emailValue = $(this).val();
 
+        $.ajax({
+            type: 'GET',
+            url: "{{route('check-customer-email')}}",
+            data: { email : emailValue},
+            DataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                $('#emailRes').text(response.message);
+            }
+        });
+    });
+</script>
 
 </body>
 

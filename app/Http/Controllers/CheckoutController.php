@@ -22,6 +22,27 @@ class CheckoutController extends Controller
         return view('website.checkout.index');
     }
 
+    public $email;
+    public function checkCustomerEmail()
+    {
+        $this->email = $_GET['email'];
+        $this->customer = Customer::where('email', $this->email)->first();
+        if ($this->customer)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => "Sorry ... Email already exist."
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'success' => true,
+                'message' => "Email Address is available."
+            ]);
+        }
+    }
+
     public function newCustomer(Request $request)
     {
        $this->customer = Customer::newCustomer($request);

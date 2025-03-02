@@ -80,7 +80,8 @@
                                 </p>
                                 <p>
                                     <label>Email address  <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" required>
+                                    <input type="email" name="email" id="email" required>
+                                    <span id="emailRes" class="text-danger"></span>
                                 </p>
                                 <p>
                                     <label>Mobile Number  <span class="text-danger">*</span></label>
